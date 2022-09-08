@@ -19,4 +19,6 @@ export const middleware = (req) => {
   if (!authCookie && isFavoritePageFollow) {
     return NextResponse.redirect(new URL(APP_ROUTE.login, req.url));
   }
+
+  return NextResponse.next();
 };
