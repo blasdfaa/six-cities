@@ -10,15 +10,15 @@ const useMarkAsFavoritePlaceCard = (queryKey) => {
   const { isLogged } = useAuth();
   const queryClient = useQueryClient();
 
-  const handleMutation = (id, action) => {
+  const handleMutation = ({ id, action }) => {
     if (!isLogged) {
       return router.push('/login');
     }
 
-    toggleFavoritePlace(id, action);
+    return toggleFavoritePlace(id, action); // Важно вернуть промис из функции!
   };
 
-  return useMutation(({ id, action }) => handleMutation(id, action), {
+  return useMutation(handleMutation, {
     // После успешного запроса обновляем только ключ который изменился
     onSuccess: (data) => {
       const currentPlaces = queryClient.getQueryData(queryKey);

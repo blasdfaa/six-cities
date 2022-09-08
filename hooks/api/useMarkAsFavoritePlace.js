@@ -16,10 +16,10 @@ const useMarkAsFavoritePlace = () => {
       return router.push('/login');
     }
 
-    toggleFavoritePlace(placeId, action);
+    return toggleFavoritePlace(placeId, action); // Важно вернуть промис из функции!
   };
 
-  return useMutation((action) => handleMutation(action), {
+  return useMutation(handleMutation, {
     // После успешного запроса обновляем только ключ который изменился
     onSuccess: (data) => {
       const currentPlace = queryClient.getQueryData(placeQueryKey);
