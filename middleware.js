@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server';
 
 import { APP_ROUTE } from './utils/constants';
 
-const NEXT_PUBLIC_AUTH_COOKIE_NAME = process.env.NEXT_PUBLIC_AUTH_COOKIE_NAME;
+const AUTH_COOKIE_NAME = process.env.NEXT_PUBLIC_AUTH_COOKIE_NAME;
 
 export const middleware = (req) => {
-  const authCookie = req.cookies.get(NEXT_PUBLIC_AUTH_COOKIE_NAME);
+  const authCookie = req.cookies.get(AUTH_COOKIE_NAME);
 
   const isLoginPageFollow = req.nextUrl.pathname.startsWith(APP_ROUTE.login);
   const isFavoritePageFollow = req.nextUrl.pathname.startsWith(APP_ROUTE.favorite);

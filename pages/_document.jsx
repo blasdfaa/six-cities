@@ -5,6 +5,8 @@ export default function Document() {
     <Html>
       <Head />
       <link rel="preload" as="image" href="/img/sprite.svg" type="image/svg+xml" />
+      <link rel="shortcut icon" href="/favicon.ico" />
+
       <body>
         <Main />
         <NextScript />
