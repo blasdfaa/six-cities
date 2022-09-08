@@ -4,6 +4,11 @@ import { APP_ROUTE } from './utils/constants';
 
 const AUTH_COOKIE_NAME = process.env.NEXT_PUBLIC_AUTH_COOKIE_NAME;
 
+// Set pathname were middleware will be executed
+export const config = {
+  matcher: '/',
+};
+
 export const middleware = (req) => {
   const authCookie = req.cookies.get(AUTH_COOKIE_NAME);
 
