@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { APP_ROUTE } from 'utils/constants';
+
+import { APP_ROUTE } from './utils/constants';
 
 const NEXT_PUBLIC_AUTH_COOKIE_NAME = process.env.NEXT_PUBLIC_AUTH_COOKIE_NAME;
 
