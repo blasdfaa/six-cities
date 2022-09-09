@@ -8,6 +8,7 @@ import { HOTEL_CATEGORIES } from 'utils/constants';
 import * as S from './style';
 
 const categories = getPlaceCategories();
+const defaultCategoryId = categories.find(({ name }) => name === HOTEL_CATEGORIES.paris).id;
 
 const Tabs = () => {
   const { query } = useRouter();
@@ -17,15 +18,12 @@ const Tabs = () => {
       <Container as="section">
         <S.List>
           {categories.map(({ id, name }) => {
-            const defaultCategory = id === HOTEL_CATEGORIES.paris;
+            // Если нет категории в URL, проверяем дефолтную
+            const activeCategory = query.category ? query.category === id : id === defaultCategoryId;
 
             return (
               <S.Item key={id}>
-                <LocationTab
-                  active={query.category === id ?? defaultCategory}
-                  href={`/?category=${id}`}
-                  shallow
-                >
+                <LocationTab active={activeCategory} href={`/?category=${id}`} shallow>
                   {name}
                 </LocationTab>
               </S.Item>
