@@ -241,6 +241,10 @@ export const globalStyles = (
         box-sizing: border-box;
       }
 
+      #__next {
+        height: 100%;
+      }
+
       *,
       ::after,
       ::before {

@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import usePage from 'hooks/usePage';
 
-const Container = ({ children, sx = {}, className }) => {
+const Container = ({ children, sx = {}, className, ...props }) => {
   const { isLoginPage } = usePage();
 
   return (
-    <Root css={sx} login={isLoginPage} className={className}>
+    <Root css={sx} login={isLoginPage} className={className} {...props}>
       {children}
     </Root>
   );

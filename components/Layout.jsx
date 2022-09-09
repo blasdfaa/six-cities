@@ -39,6 +39,7 @@ const Root = styled.div`
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   background-color: #fff;
+  height: 100%;
 
   ${({ login }) => login && loginPageStyles};
   ${({ gray }) =>

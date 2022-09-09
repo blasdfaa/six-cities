@@ -12,6 +12,12 @@ export const requireLogin = async (credentials) => {
   return data;
 };
 
+export const requireLogout = async () => {
+  const { data } = await axios.delete('/logout');
+
+  return data;
+};
+
 export const submitReview = async (id, review) => {
   const { data } = await axios.post(`/comments/${id}`, review);
 

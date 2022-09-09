@@ -20,9 +20,6 @@ const Map = dynamic(() => import('../Map/Map'), { ssr: false });
 const NearbyPlacesList = dynamic(() => import('../NearbyPlacesList/NearbyPlacesList'), { ssr: false });
 
 const Property = () => {
-  const router = useRouter();
-  const { isLogged } = useAuth();
-
   const place = useGetPlaceById();
   const markAsFavorite = useMarkAsFavoritePlace();
 
@@ -54,13 +51,7 @@ const Property = () => {
             <S.Name>{title}</S.Name>
 
             <S.AddToFavoriteBtn
-              onClick={async () => {
-                if (!isLogged) {
-                  return router.push('/login');
-                }
-
-                markAsFavorite.mutate(toggleFavoriteAction);
-              }}
+              onClick={() => markAsFavorite.mutate(toggleFavoriteAction)}
               active={is_favorite}
             />
           </div>

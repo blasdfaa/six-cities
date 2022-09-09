@@ -3,6 +3,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { getPlaceById } from 'api/place';
 import Head from 'next/head';
 import Property from 'section/offer/Property/Property';
+import { parseCookieToken } from 'utils/commonUtils';
 
 const OfferPage = () => {
   return (
@@ -27,13 +28,17 @@ const Root = styled.main`
   padding-bottom: 129px;
 `;
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ req, params }) => {
   const queryClient = new QueryClient();
+
+  const token = parseCookieToken(req.headers.cookie);
 
   try {
     // Важно использовать `fetchQuery`, так-как нам нужно проверить данные и в случае неудачи вернуть 404
     // `prefetchQuery` не возвращает ничего!
-    const data = await queryClient.fetchQuery(['place', params?.id], () => getPlaceById(params?.id));
+    const data = await queryClient.fetchQuery(['place', params?.id], () =>
+      getPlaceById({ id: params?.id, token }),
+    );
 
     if (!data) {
       return {

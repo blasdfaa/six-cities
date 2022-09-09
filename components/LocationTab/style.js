@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const activeStyles = css`
   text-shadow: 1px 0 0, 0.5px 0 0, -1px 0 0;
@@ -7,7 +8,7 @@ const activeStyles = css`
   background-color: #4481c3;
 `;
 
-export const Root = styled.a`
+export const Root = styled(Link, { shouldForwardProp: (prop) => prop !== 'isActive' })`
   display: block;
   padding: 9px 21px 6px 11px;
   font-size: 19px;
@@ -23,5 +24,5 @@ export const Root = styled.a`
     text-shadow: 1px 0 0, 0.5px 0 0, -1px 0 0;
   }
 
-  ${({ active }) => active && activeStyles};
+  ${({ isActive }) => isActive && activeStyles};
 `;

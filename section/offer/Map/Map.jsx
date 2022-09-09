@@ -5,13 +5,13 @@ import useGetPlaceById from 'hooks/api/useGetPlaceById';
 import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 
-const locationIcon = new L.Icon({
+const PLACE_MAP_ICON = new L.Icon({
   iconUrl: '/img/pin.svg',
   iconSize: [27, 39],
   iconAnchor: [19.5, 27],
 });
 
-const currentLocationIcon = new L.Icon({
+const PLACE_MAP_ICON_ACTIVE = new L.Icon({
   iconUrl: '/img/pin-active.svg',
   iconSize: [27, 39],
   iconAnchor: [19.5, 27],
@@ -34,7 +34,7 @@ const Map = () => {
           <Marker
             position={[latitude, longitude]}
             key={markerId}
-            icon={markerId === id ? currentLocationIcon : locationIcon}
+            icon={markerId === id ? PLACE_MAP_ICON_ACTIVE : PLACE_MAP_ICON}
           />
         ))}
     </Root>

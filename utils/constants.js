@@ -16,3 +16,10 @@ export const HOTEL_CATEGORIES = {
   hamburg: 'Hamburg',
   dusseldorf: 'Dusseldorf',
 };
+
+export const SORT_TYPE = {
+  popular: 'Popular',
+  topRateFirst: 'Top rated First',
+  priceToHigh: 'Price: low to high',
+  popularToLow: 'Price: high to low',
+};

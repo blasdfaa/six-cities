@@ -2,9 +2,9 @@ import React from 'react';
 
 import * as S from './style';
 
-const LocationTab = ({ children, active = false, ...props }) => {
+const LocationTab = ({ href = '#', children, active = false, ...props }) => {
   return (
-    <S.Root active={active} {...props}>
+    <S.Root isActive={active} href={href} {...props}>
       {children}
     </S.Root>
   );

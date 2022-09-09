@@ -10,8 +10,27 @@ export const Body = styled.article`
   }
 `;
 
+Body.Common = styled(Body)`
+  width: 260px;
+  margin-left: 8px;
+  margin-bottom: 24px;
+`;
+
+Body.Favorite = styled(Body)`
+  display: flex;
+  align-items: flex-start;
+  width: 421px;
+  margin-bottom: 32px;
+`;
+
 export const ImageWrapper = styled.div`
   margin-bottom: 9px;
+`;
+
+ImageWrapper.Favorite = styled(ImageWrapper)`
+  max-width: 150px;
+  margin-right: 16px;
+  margin-bottom: 0;
 `;
 
 export const Image = styled.div`
@@ -23,6 +42,10 @@ export const Image = styled.div`
 
 export const Info = styled.div`
   flex-grow: 1;
+`;
+
+Info.Favorite = styled(Info)`
+  padding-top: 1px;
 `;
 
 export const PriceWrapper = styled.div`

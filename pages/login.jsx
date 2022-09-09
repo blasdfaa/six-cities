@@ -4,10 +4,10 @@ import LocationTab from 'components/LocationTab/LocationTab';
 import Main from 'components/Main';
 import React from 'react';
 import LoginForm from 'section/forms/LoginForm/LoginForm';
-import { HOTEL_CATEGORIES } from 'utils/constants';
+import { getPlaceCategories } from 'utils/commonUtils';
 import { getRandomInt } from 'utils/getRandomInt';
 
-const categoryList = Object.values(HOTEL_CATEGORIES);
+const categoryList = getPlaceCategories();
 
 const Login = () => {
   const [randomCategory, setRandomCategory] = React.useState('');
@@ -22,7 +22,9 @@ const Login = () => {
         <LoginForm />
 
         <RandomCity>
-          <LocationTab active>{randomCategory}</LocationTab>
+          <LocationTab href={`/?category=${randomCategory.id}`} active>
+            {randomCategory.name}
+          </LocationTab>
         </RandomCity>
       </Container>
     </Main>

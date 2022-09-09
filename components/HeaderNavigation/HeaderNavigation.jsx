@@ -1,4 +1,7 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { requireLogout } from 'api/user';
 import useGetProfile from 'hooks/api/useGetProfile';
+import useAuth from 'hooks/useAuth';
 import { APP_ROUTE } from 'utils/constants';
 
 import * as S from './style';
@@ -29,22 +32,36 @@ const UnauthorizedItem = () => (
   </S.NavItem>
 );
 
-const AuthorizedItem = ({ user }) => (
-  <>
-    <S.NavItem>
-      <S.NavLink href={APP_ROUTE.favorite}>
-        <S.Avatar css={{ backgroundImage: `url(${user.avatar_url})` }} />
+const AuthorizedItem = ({ user }) => {
+  const { removeToken } = useAuth();
+  const queryClient = useQueryClient();
 
-        <S.UserName>{user.name}</S.UserName>
-      </S.NavLink>
-    </S.NavItem>
+  const logout = useMutation(requireLogout, {
+    onSuccess: () => {
+      removeToken();
 
-    <S.NavItem>
-      <S.LogoutButton type="button">
-        <S.LogoutButtonText>Sign out</S.LogoutButtonText>
-      </S.LogoutButton>
-    </S.NavItem>
-  </>
-);
+      queryClient.invalidateQueries(['profile']);
+      queryClient.invalidateQueries(['places']);
+    },
+  });
+
+  return (
+    <>
+      <S.NavItem>
+        <S.NavLink href={APP_ROUTE.favorite}>
+          <S.Avatar css={{ backgroundImage: `url(${user.avatar_url})` }} />
+
+          <S.UserName>{user.name}</S.UserName>
+        </S.NavLink>
+      </S.NavItem>
+
+      <S.NavItem>
+        <S.LogoutButton type="button" onClick={logout.mutate}>
+          <S.LogoutButtonText>Sign out</S.LogoutButtonText>
+        </S.LogoutButton>
+      </S.NavItem>
+    </>
+  );
+};
 
 export default HeaderNavigation;

@@ -5,7 +5,7 @@ import { toggleFavoritePlace } from 'api/place';
 import useAuth from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 
-const useMarkAsFavoritePlaceCard = (queryKey) => {
+const useMarkAsFavoritePlaceCard = (queryKey, { revalidate } = {}) => {
   const router = useRouter();
   const { isLogged } = useAuth();
   const queryClient = useQueryClient();
@@ -19,10 +19,15 @@ const useMarkAsFavoritePlaceCard = (queryKey) => {
   };
 
   return useMutation(handleMutation, {
-    // После успешного запроса обновляем только ключ который изменился
+    // После успешного запроса обновляем ключ у отеля который изменился
     onSuccess: (data) => {
       const currentPlaces = queryClient.getQueryData(queryKey);
 
+      if (revalidate) {
+        return queryClient.invalidateQueries(queryKey);
+      }
+
+      // Если не указана ревалидация, обновим ключ вручную (В этом случае запроса не будет, получим новые данные и обновим значение)
       const newPlaces = currentPlaces.map((place) => {
         if (place.id === data.id) {
           return {
